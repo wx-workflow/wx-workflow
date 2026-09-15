@@ -3,11 +3,11 @@
 #
 # shellcheck disable=all
 export NET=arps                    # rrfs, rtma, 
-export MESH_NAME=ar3.5km           # conus12km, conus3km, south3.5km, etc
+export MESH_NAME=ar3p5km           # conus12km, conus3km, etc
 export WGF="det"   # working group function = "det", "enkf", "ens", "firewx"
-export EXP_NAME=ar3.5km
+export EXP_NAME=ar3p5km
 export VERSION=$(cat ./VERSION)
-export TAG=d3.5km
+export TAG=d3p5km
 export OPSROOT=/gpfs/f6/arfs-gsl/world-shared/gge/ar-ps/${EXP_NAME}
 export EXPDIR=${OPSROOT}/exp/${NET}${WGF}
 export COMROOT=${OPSROOT}/com      # task input and output data as well as logs
