@@ -8,7 +8,7 @@ export WGF="det"   # working group function = "det", "enkf", "ens", "firewx"
 export EXP_NAME=g10km
 export VERSION=$(cat ./VERSION)
 export TAG=g10km
-export OPSROOT=/gpfs/f6/arfs-gsl/world-shared/gge/OPSROOT/${EXP_NAME}
+export OPSROOT=/gpfs/f6/arfs-gsl/world-shared/gge/global/OPSROOT/${EXP_NAME}
 export EXPDIR=${OPSROOT}/exp/${NET}${WGF}
 export COMROOT=${OPSROOT}/com      # task input and output data as well as logs
 export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed immediately upon task completion unless KEEPDATA=YES
@@ -34,11 +34,11 @@ export COLDSTART_CYCS="00"   # cycles to cold start from external models
 export KEEPDATA=YES
 #
 export IC_EXTRN_MDL_NAME="GFS"
-export IC_EXTRN_MDL_FILENAME_PATTERN="gfs.@Y@m@d/@H/products/atmos/grib2/0p25/gfs.t@Hz.pres_a.0p25.f^HHH^.grib2"
-export IC_EXTRN_MDL_FILENAME_PATTERN_B="gfs.@Y@m@d/@H/products/atmos/grib2/0p25/gfs.t@Hz.pres_b.0p25.f^HHH^.grib2"
-export IC_EXTRN_MDL_BASEDIR="/gpfs/f6/gsl-data-depot/world-shared/data/grids/gfsv17"
+export IC_EXTRN_MDL_FILENAME_PATTERN="gfs.@Y@m@d/@H/gfs.t@Hz.pgrb2.0p25.f^HHH^"
+export IC_EXTRN_MDL_FILENAME_PATTERN_B="gfs.@Y@m@d/@H/gfs.t@Hz.pgrb2b.0p25.f^HHH^"
+export IC_EXTRN_MDL_BASEDIR="/gpfs/f6/bil-fire10-oar/world-shared/RRFS2_RETRO_DATA/May2024/GFS"
 #
-export ACCOUNT="arfs-gsl"
+export ACCOUNT="wrfruc"
 export QUEUE="normal"
 export PARTITION="batch"
 export CLUSTER="c6"
