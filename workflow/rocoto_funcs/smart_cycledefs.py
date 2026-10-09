@@ -74,7 +74,8 @@ def smart_cycledefs():
     dcCycledef = {}
     if os.getenv('DO_RTMA', 'FALSE').upper() == 'FALSE':
         dcCycledef['ic'] = f'{cycledef_ic}'
-        dcCycledef['lbc'] = f'{cycledef_lbc}'
+        if "global" not in os.getenv("MESH_NAME"):
+            dcCycledef['lbc'] = f'{cycledef_lbc}'
     #
     exclude_str = os.getenv('CYCLEDEF_PROD_EXCLUDE', '')
     if exclude_str:

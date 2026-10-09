@@ -14,7 +14,6 @@ export COMROOT=${OPSROOT}/com      # task input and output data as well as logs
 export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed immediately upon task completion unless KEEPDATA=YES
 #
 export REALTIME=true     # true, false
-export CYCLEDEF_PROD_EXCLUDE="02 03 14 15"
 export ZETA_LEVELS="L60.txt"
 #
 export DO_RTMA=true
