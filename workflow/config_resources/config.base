@@ -47,7 +47,7 @@ if [[ "${DO_RTMA^^}" == "TRUE" ]]; then
   export IC_EXTRN_MDL_NAME="GFS"   # required to link correct invariant.nc
   export LBC_INTERVAL=1
   export DIAG_INTERVAL=1
-  export DIAG_TIMELEVELS="@dt@ 1-999"  # @dt@ will be replaced with the actual vaule during the setup process
+  export DIAG_TIMELEVELS="@dt@ 1-999"  # @dt@ will be replaced with the actual value during the setup process
 fi
 
 # PREP_LBC_LOOK_BACK_HRS
