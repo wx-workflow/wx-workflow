@@ -8,7 +8,7 @@ export WGF="det"   # working group function = "det", "enkf", "ens", "firewx"
 export EXP_NAME=rtma
 export VERSION=$(cat ./VERSION)
 export TAG=rtma
-export OPSROOT=/scratch3/BMC/wrfruc/gge/OPSROOT/${EXP_NAME}
+export OPSROOT=/gpfs/f6/arfs-gsl/world-shared/gge/rtma/OPSROOT/${EXP_NAME}
 export EXPDIR=${OPSROOT}/exp/${NET}${WGF}
 export COMROOT=${OPSROOT}/com      # task input and output data as well as logs
 export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed immediately upon task completion unless KEEPDATA=YES
@@ -16,7 +16,7 @@ export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed i
 export ZETA_LEVELS="L60.txt"
 #
 export DO_RTMA=true
-export COMINrrfs="/home/role.rtrr/rrfsv2x"  # the RRFS location of rrfs.$PDY/$cyc/(fcst,lbc)/det/mpasout*.nc
+export COMINrrfs="/gpfs/f6/bil-fire10-oar/world-shared/jjh/rrfsv2/RRFSv2X/L60/OPSROOT/RRFSv2X.retv4/com/rrfs/v2.1.4"  # the RRFS location of rrfs.$PDY/$cyc/(fcst,lbc)/det/mpasout*.nc
 export DO_NONVAR_CLOUD_ANA=false
 export DO_CLEAN=true
 export HYB_WGT_ENS=0.0
@@ -25,6 +25,7 @@ export HYB_ENS_TYPE=1      # 1.rrfs; 2.interpolated GEFS/GDAS; 0.TBD on the fly 
 export HYB_ENS_PATH=""     # if empty, the workflow will try to find ensembles automatically
 export DO_RADAR_REF=false  # does not work for 3DVar, only EnVar or GETKF
 export RADARREFL_TIMELEVEL="00"  # 00 15 30 45 min
+export SAT_USELIST=""  # check config.base on how to set up this variable
 export ENS_SIZE=30
 export ENS_BEC_LOOK_BACK_HRS=1  # define the hours going back for ensemble forecast files for the ensemble BEC
 
@@ -32,16 +33,16 @@ export STATIC_BEC_MODEL="GSIBEC" # the static bec model, GSIBEC and BUMPBEC
 export GSIBEC_X=40 #GSIBEC_X * GSIBEC_Y should match the number of MPI tasks
 export GSIBEC_Y=20
 #
-export RETRO_PERIOD="2024052700-2024052800"
+export RETRO_PERIOD="2024050700-2024050800"
 export DO_PYDAMONITOR=true
 export DO_GRAPHICS=true
 export GRAPHICS_TILES="full NE NC NW SE SC SW EastCO"
 export DO_ARCHIVE=true
-export ARCHIVE_INTERVAL=12  # run the archive task every several hours
-export ARCHIVE_HPSSDIR="/5year/BMC/wrfruc/Guoqing.Ge/${EXP_NAME}"
-export ARCHIVE_COM1_SPEC='{"include":"ioda*, jedivar, nonvar*, fcst, upp, pyDAmonitor, graphics", "exclude":""}'  # use " inside and ' outside
-export ARCHIVE_STMP=''  # eg. 'fcst,mpassit'  # archive files under the given task umbrella directories
-export ARCHIVE_STMP_INTERVAL='12'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
+#export ARCHIVE_INTERVAL=12  # run the archive task every several hours
+#export ARCHIVE_HPSSDIR="/5year/BMC/wrfruc/Guoqing.Ge/${EXP_NAME}"
+#export ARCHIVE_COM1_SPEC='{"include":"ioda*, jedivar, nonvar*, fcst, upp, pyDAmonitor, graphics", "exclude":""}'  # use " inside and ' outside
+#export ARCHIVE_STMP=''  # eg. 'fcst,mpassit'  # archive files under the given task umbrella directories
+#export ARCHIVE_STMP_INTERVAL='1'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
 #
 export NODES_FCST="<nodes>40:ppn=40</nodes>"
 export NODES_MPASSIT="<nodes>4:ppn=20</nodes>"
@@ -77,14 +78,6 @@ case ${MACHINE} in
     export NODES_UPP="<nodes>1:ppn=80</nodes>"
     export NODES_JEDIVAR="<nodes>20:ppn=40</nodes>"
     ;;
-  "jet")
-    export OBSPATH="/lfs5/BMC/nrtrr/RRFS2_RETRO_DATA/May2024/obs_rap"
-    export OBSPATH_NSSLMOSAIC="/lfs5/BMC/nrtrr/RRFS2_RETRO_DATA/May2024/reflectivity"
-    export OBSPATH_AIRNOW="/lfs5/BMC/nrtrr/RRFS2_RETRO_DATA/May2024/airnow"
-    export ACCOUNT="nrtrr"
-    export QUEUE="batch"
-    export PARTITION="kjet"
-    ;;
   "orion"|"hercules")
     export OBSPATH="/work2/noaa/wrfruc/RRFS2_RETRO_DATA/May2024/obs_rap"
     export OBSPATH_NSSLMOSAIC="/work2/noaa/wrfruc/RRFS2_RETRO_DATA/May2024/reflectivity"
@@ -93,6 +86,15 @@ case ${MACHINE} in
     export QUEUE="batch"
     export PARTITION=${MACHINE}
     export CLUSTER=""
+    if [[ "${MACHINE}" == "hercules" ]]; then
+      export NODES_IC="<nodes>20:ppn=80</nodes>"
+      export NODES_LBC="<nodes>20:ppn=80</nodes>"
+      export NODES_FCST="<nodes>20:ppn=80</nodes>"
+      export NODES_MPASSIT="<nodes>2:ppn=80</nodes>"
+      export NODES_UPP="<nodes>1:ppn=80</nodes>"
+      export NODES_JEDIVAR="<nodes>10:ppn=80</nodes>"
+      export NODES_MPAS_BLEND="<nodes>20:ppn=80</nodes>"
+    fi
     ;;
   "gaeac6")
     export OBSPATH="/gpfs/f6/bil-fire10-oar/world-shared/RRFS2_RETRO_DATA/May2024/obs_rap"
@@ -102,6 +104,19 @@ case ${MACHINE} in
     export QUEUE="normal"
     export PARTITION="batch"
     export CLUSTER="c6"
+    export NODES_FCST="<nodes>10:ppn=160</nodes>"
+    export NODES_MPASSIT="<nodes>1:ppn=160</nodes>"
+    export NODES_UPP="<nodes>1:ppn=80</nodes>"
+    export NODES_JEDIVAR="<nodes>20:ppn=40</nodes>"
+    ;;
+  "gaeac7")
+    export OBSPATH="/gpfs/f7/wrfruc/world-shared/RRFS2_RETRO_DATA/May2024/obs_rap"
+    export OBSPATH_NSSLMOSAIC="/gpfs/f7/wrfruc/world-shared/RRFS2_RETRO_DATA/May2024/reflectivity"
+    export OBSPATH_AIRNOW="/gpfs/f7/wrfruc/world-shared/RRFS2_RETRO_DATA/May2024/airnow"
+    export ACCOUNT="bil-fire10-oar"
+    export QUEUE="normal"
+    export PARTITION="batch"
+    export CLUSTER="c7"
     export NODES_FCST="<nodes>10:ppn=160</nodes>"
     export NODES_MPASSIT="<nodes>1:ppn=160</nodes>"
     export NODES_UPP="<nodes>1:ppn=80</nodes>"

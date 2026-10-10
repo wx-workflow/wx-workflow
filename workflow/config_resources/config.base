@@ -43,6 +43,11 @@ if [[ "${DO_RTMA^^}" == "TRUE" ]]; then
   export DO_JEDI=true
   export FCST_LEN_HRS_CYCLES="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0"  # 24 zeros
   export POST_GROUP_TOT_NUM=1
+  export COLDSTART_CYCS="00"
+  export IC_EXTRN_MDL_NAME="GFS"   # required to link correct invariant.nc
+  export LBC_INTERVAL=1
+  export DIAG_INTERVAL=1
+  export DIAG_TIMELEVELS="@dt@ 1-999"  # @dt@ will be replaced with the actual vaule during the setup process
 fi
 
 # PREP_LBC_LOOK_BACK_HRS

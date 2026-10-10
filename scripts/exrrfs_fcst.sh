@@ -165,25 +165,6 @@ for fhr in ${mpasout_all[@]}; do
     ln -snf "${UMBRELLA_FCST_DATA}/mpasout.${timestr}.nc.done" "${DATA}/"
   fi
 done
-#
-# if DO_RTMA, regenerate streams.atmosphere, and link the first time step history/diag files as f000 files
-#
-if [[ "${DO_RTMA^^}" == "TRUE" ]]; then
-  sed -e "s/@restart_interval@/none/" \
-    -e "s|output_interval=\"@history_interval@\"|output_timelevels=\"${FCST_DT}s\"|" \
-    -e "s|output_interval=\"@diag_interval@\"|output_timelevels=\"${FCST_DT}s\"|" \
-    -e "s/@lbc_interval@/1/" -e "s/@mpasout_interval@/none/"  \
-      "${PARMrrfs}"/streams.atmosphere  > streams.atmosphere
-  timestr0=$(date -d "${CDATE:0:8} ${CDATE:8:2}" +%Y-%m-%d_%H.%M.%S)
-  timestr2=$(date -d "${CDATE:0:8} ${CDATE:8:2} +${FCST_DT} seconds" +%Y-%m-%d_%H.%M.%S) # rrfslint: disable=RRFS005
-  rm -rf "${DATA}/history.${timestr0}.nc" "${DATA}/history.${timestr0}.nc.done" \
-    "${DATA}/diag.${timestr0}.nc" "${DATA}/diag.${timestr0}.nc.done" \
-    "${DATA}/mpasout.${timestr0}.nc.done"  # remove unintended links created before DO_RTMA
-  ln -snf "${UMBRELLA_FCST_DATA}/history.${timestr0}.nc" "${DATA}/history.${timestr2}.nc"
-  ln -snf "${UMBRELLA_FCST_DATA}/history.${timestr0}.nc.done" "${DATA}/history.${timestr2}.nc.done"
-  ln -snf "${UMBRELLA_FCST_DATA}/diag.${timestr0}.nc" "${DATA}/diag.${timestr2}.nc"
-  ln -snf "${UMBRELLA_FCST_DATA}/diag.${timestr0}.nc.done" "${DATA}/diag.${timestr2}.nc.done"
-fi
 
 # run the MPAS model
 source prep_step

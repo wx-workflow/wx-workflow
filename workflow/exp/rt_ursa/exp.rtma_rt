@@ -26,6 +26,7 @@ export HYB_ENS_TYPE=1      # 1.rrfs; 2.interpolated GEFS/GDAS; 0.TBD on the fly 
 export HYB_ENS_PATH=""     # if empty, the workflow will try to find ensembles automatically
 export DO_RADAR_REF=false  # does not work for 3DVar, only EnVar or GETKF
 export RADARREFL_TIMELEVEL="00"  # 00 15 30 45 min
+export SAT_USELIST=""  # check config.base on how to set up this variable
 export ENS_SIZE=30
 export ENS_BEC_LOOK_BACK_HRS=1  # define the hours going back for ensemble forecast files for the ensemble BEC
 
@@ -37,11 +38,11 @@ export DO_PYDAMONITOR=true
 export DO_GRAPHICS=true
 export GRAPHICS_TILES="full NE NC NW SE SC SW EastCO"
 export DO_ARCHIVE=true
-export ARCHIVE_INTERVAL=12  # run the archive task every several hours
-export ARCHIVE_HPSSDIR="/5year/BMC/wrfruc/Guoqing.Ge/${EXP_NAME}"
-export ARCHIVE_COM1_SPEC='{"include":"ioda*, jedivar, nonvar*, fcst, upp, pyDAmonitor, graphics", "exclude":""}'  # use " inside and ' outside
-export ARCHIVE_STMP=''  # eg. 'fcst,mpassit'  # archive files under the given task umbrella directories
-export ARCHIVE_STMP_INTERVAL='12'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
+#export ARCHIVE_INTERVAL=12  # run the archive task every several hours
+#export ARCHIVE_HPSSDIR="/5year/BMC/wrfruc/Guoqing.Ge/${EXP_NAME}"
+#export ARCHIVE_COM1_SPEC='{"include":"ioda*, jedivar, nonvar*, fcst, upp, pyDAmonitor, graphics", "exclude":""}'  # use " inside and ' outside
+#export ARCHIVE_STMP=''  # eg. 'fcst,mpassit'  # archive files under the given task umbrella directories
+#export ARCHIVE_STMP_INTERVAL='1'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
 #
 export NODES_FCST="<nodes>10:ppn=160</nodes>"
 export NODES_MPASSIT="<nodes>1:ppn=160</nodes>"
@@ -61,17 +62,6 @@ export COM_RETENTION_CYCS='{"default": 96, "lbc,fcst": 72, "upp,nclprd,pyDAmonit
 export CYCLETHROTTLE=3600
 export CYCLELIFESPAN=2
 #
-# local.setup: setup some local options specific to a platform or an experiment
-#
-# set up IC, LBC sources and A/Q/P/R information
-export IC_EXTRN_MDL_NAME="GFS"
-export IC_EXTRN_MDL_FILENAME_PATTERN="gfs.@Y@m@d/@H/atmos/gfs.t@Hz.pgrb2.0p25.f^HHH^"
-export IC_EXTRN_MDL_FILENAME_PATTERN_B="gfs.@Y@m@d/@H/atmos/gfs.t@Hz.pgrb2b.0p25.f^HHH^"
-export LBC_EXTRN_MDL_NAME=${IC_EXTRN_MDL_NAME}
-export LBC_EXTRN_MDL_FILENAME_PATTERN=${IC_EXTRN_MDL_FILENAME_PATTERN}
-export LBC_EXTRN_MDL_FILENAME_PATTERN_B=${IC_EXTRN_MDL_FILENAME_PATTERN_B}
-export IC_EXTRN_MDL_BASEDIR="/public/data/grids/gfs/ncep"
-export LBC_EXTRN_MDL_BASEDIR=${IC_EXTRN_MDL_BASEDIR}
 export OBSPATH="/public/data/grids/rap/obs"
 export OBSPATH_NSSLMOSAIC="/public/data/radar/mrms"
 
@@ -87,7 +77,5 @@ export STARTTIME_JEDIVAR="00:40:00"
 export STARTTIME_FCST="00:10:00"
 export STARTTIME_MPASSIT="00:15:00"
 export STARTTIME_UPP="00:15:00"
-export STARTTIME_PREP_IC="02:00:00"
-export STARTTIME_PREP_LBC="00:15:00"
 export MORE_XML_ENTITIES=false
 export USE_THE_LATEST_SATBIAS=false
