@@ -5,7 +5,7 @@
 export NET=arps                    # rrfs, rtma, 
 export MESH_NAME=ar3p5km           # conus12km, conus3km, na12km, etc
 export WGF="det"   # working group function = "det", "enkf", "ens", "firewx"
-export EXP_NAME=rt2026
+export EXP_NAME=ar_dev1
 export VERSION=$(cat ./VERSION)
 export TAG=d3p5km
 export OPSROOT=/gpfs/f6/arfs-gsl/world-shared/gge/rrfs2/PEAR/${EXP_NAME}
