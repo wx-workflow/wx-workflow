@@ -14,7 +14,7 @@ export COMROOT=${OPSROOT}/com      # task input and output data as well as logs
 export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed immediately upon task completion unless KEEPDATA=YES
 #
 export REALTIME=false
-export ZETA_LEVELS="L125.txt"
+export ZETA_LEVELS="L65.txt"
 export PHYSICS_SUITE="mpas_global"
 export USE_MERRA2=false  # false: default GOCART aerosol climatology; true: MERRA2 aerosol climatology
 #
