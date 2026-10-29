@@ -5,15 +5,15 @@
 export NET=global                  # rrfs, rtma, 
 export MESH_NAME=global15km     # conus12km, conus3km, na12km, etc
 export WGF="det"   # working group function = "det", "enkf", "ens", "firewx"
-export EXP_NAME=g15km
 export VERSION=$(cat ./VERSION)
+export EXP_NAME=g15km
 export TAG=g15km
 export OPSROOT=/gpfs/f6/arfs-gsl/world-shared/gge/global/OPSROOT/${EXP_NAME}
 export EXPDIR=${OPSROOT}/exp/${NET}${WGF}
 export COMROOT=${OPSROOT}/com      # task input and output data as well as logs
 export DATAROOT=${OPSROOT}/stmp    # task workdirs ($DATA) which to be removed immediately upon task completion unless KEEPDATA=YES
 #
-export ZETA_LEVELS="L125.txt"  # L112.txt
+export ZETA_LEVELS="L65.txt"  # L125.txt
 export PHYSICS_SUITE="mpas_global"
 export DO_CLEAN=true
 #

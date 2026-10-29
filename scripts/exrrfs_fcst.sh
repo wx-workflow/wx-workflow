@@ -33,7 +33,9 @@ fi
 #
 #  link bdy and fix files
 #
-ln -snf "${UMBRELLA_PREP_LBC_DATA}"/lbc*.nc .
+if [[ "${MESH_NAME}" != global* ]]; then
+  ln -snf "${UMBRELLA_PREP_LBC_DATA}"/lbc*.nc .
+fi
 
 ln -snf "${FIXrrfs}/physics/${PHYSICS_SUITE}"/* .
 ln -snf "${FIXrrfs}/${MESH_NAME}/${MESH_NAME}.ugwp_oro_data.nc" ./ugwp_oro_data.nc
