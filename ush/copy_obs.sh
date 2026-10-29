@@ -41,6 +41,15 @@ mappings["ioda_crsfdb_n21.nc"]="${obspath}/ioda_crsfdb_n21.nc"
 mappings["ioda_mtiasi_metop-b.nc"]="${obspath}/ioda_mtiasi_metop-b.nc"
 mappings["ioda_mtiasi_metop-c.nc"]="${obspath}/ioda_mtiasi_metop-c.nc"
 
+if [[ "${DO_MTGIRS^^}" == "TRUE" ]]; then
+  if ${jedivar}; then
+    mtgpath="${COMOUT}/ioda_mtgirs/${WGF}"
+  else # getkf
+    mtgpath="${COMOUT}/ioda_mtgirs/${IODA_BUFR_WGF}"
+  fi
+  mappings["ioda_mtgirs.nc"]="${mtgpath}/ioda_mtgirs.nc"
+fi
+
 if [[ "${DO_RADAR_REF^^}" == "TRUE" ]]; then
   if ${jedivar}; then
     obspath="${COMOUT}/ioda_mrms_refl/${WGF}"

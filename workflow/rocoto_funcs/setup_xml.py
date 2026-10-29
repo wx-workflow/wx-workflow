@@ -26,6 +26,7 @@ from rocoto_funcs.mpassit import mpassit
 from rocoto_funcs.upp import upp
 from rocoto_funcs.ioda_airnow import ioda_airnow
 from rocoto_funcs.ioda_bufr import ioda_bufr
+from rocoto_funcs.ioda_mtgirs import ioda_mtgirs
 from rocoto_funcs.ioda_mrms_refl import ioda_mrms_refl
 from rocoto_funcs.nonvar_bufrobs import nonvar_bufrobs
 from rocoto_funcs.nonvar_reflobs import nonvar_reflobs
@@ -87,6 +88,8 @@ def setup_xml(HOMErrfs, expdir):
             if os.getenv("DO_IODA", "FALSE").upper() == "TRUE":
                 if do_chemistry == "TRUE":
                     ioda_airnow(xmlFile, expdir)
+                if os.getenv("DO_MTGIRS", "FALSE").upper() == "TRUE":
+                    ioda_mtgirs(xmlFile, expdir)
                 ioda_bufr(xmlFile, expdir)
             if os.getenv("DO_RADAR_REF", "FALSE").upper() == "TRUE":
                 ioda_mrms_refl(xmlFile, expdir)
@@ -165,6 +168,8 @@ def setup_xml(HOMErrfs, expdir):
             if os.getenv("DO_IODA", "FALSE").upper() == "TRUE":
                 if do_chemistry == "TRUE":
                     ioda_airnow(xmlFile, expdir)
+                if os.getenv("DO_MTGIRS", "FALSE").upper() == "TRUE":
+                    ioda_mtgirs(xmlFile, expdir)
                 ioda_bufr(xmlFile, expdir)
             if os.getenv("DO_RADAR_REF", "FALSE").upper() == "TRUE":
                 ioda_mrms_refl(xmlFile, expdir)
