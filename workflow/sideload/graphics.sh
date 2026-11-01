@@ -11,7 +11,8 @@ export PARMrrfs=${PARMrrfs:-${HOMErrfs}/parm}
 export USHrrfs=${USHrrfs:-${HOMErrfs}/ush}
 #
 pygrafdir="${HOMErrfs}/workflow/sideload/pygraf"
-image_list="${pygrafdir}/image_lists/regional_mpas_subset.yml"
+GRAPHICS_IMAGE_LIST=${GRAPHICS_IMAGE_LIST:-"regional_mpas_subset.yml"}
+image_list="${pygrafdir}/image_lists/${GRAPHICS_IMAGE_LIST}"
 file_tmpl="${NET}.t${cyc}z.prslev.f0{FCST_TIME:02d}.${UPP_DOMAIN}grib2"
 model=${GRAPHICS_MODEL:-${NET}}
 ntasks=${NTASKS:-12}
