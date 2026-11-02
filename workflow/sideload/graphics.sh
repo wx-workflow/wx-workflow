@@ -13,7 +13,7 @@ export USHrrfs=${USHrrfs:-${HOMErrfs}/ush}
 pygrafdir="${HOMErrfs}/workflow/sideload/pygraf"
 GRAPHICS_IMAGE_LIST=${GRAPHICS_IMAGE_LIST:-"regional_mpas_subset.yml"}
 image_list="${pygrafdir}/image_lists/${GRAPHICS_IMAGE_LIST}"
-file_tmpl="${NET}.t${cyc}z.prslev.f0{FCST_TIME:02d}.${UPP_DOMAIN}grib2"
+file_tmpl="${NET}.t${cyc}z.prslev.f{FCST_TIME:03d}.${UPP_DOMAIN}grib2"
 model=${GRAPHICS_MODEL:-${NET}}
 ntasks=${NTASKS:-12}
 grib2_dir="${COMOUT}/upp/det"
@@ -31,16 +31,22 @@ fcst_len_hrs_thiscyc=$( "${USHrrfs}/find_fcst_length.sh"  "${fcst_len_hrs_cycles
 echo "forecast length for this cycle is ${fcst_len_hrs_thiscyc}"
 fhr1=0
 fhr2=${fcst_len_hrs_thiscyc}
+fhr_inc=${HISTORY_INTERVAL:-1}
 wait_minutes=${WAIT_MINUTES:-180}
+if (( fhr_inc == 1 )); then
+  all_leads="--all_leads"
+else
+  all_leads=""
+fi
 #
 # generate the graphics
 #
 if [[ "${GRAPHICS_ZIP^^}" == "TRUE" ]]; then
   mkdir -p "${zipdir}"
-  python create_graphics.py maps --all_leads -d ${grib2_dir} -f ${fhr1} ${fhr2} --file_type prs --file_tmpl ${file_tmpl} -m ${model} \
+  python create_graphics.py maps ${all_leads} -d ${grib2_dir} -f ${fhr1} ${fhr2} ${fhr_inc} --file_type prs --file_tmpl ${file_tmpl} -m ${model} \
       --images ${image_list} hourly -n ${ntasks} -o ${workdir} -s ${CDATE} --tiles ${tile} -z ${zipdir} -w ${wait_minutes}
 else
-  python create_graphics.py maps --all_leads -d ${grib2_dir} -f ${fhr1} ${fhr2} --file_type prs --file_tmpl ${file_tmpl} -m ${model} \
+  python create_graphics.py maps ${all_leads} -d ${grib2_dir} -f ${fhr1} ${fhr2} ${fhr_inc} --file_type prs --file_tmpl ${file_tmpl} -m ${model} \
       --images ${image_list} hourly -n ${ntasks} -o ${workdir} -s ${CDATE} --tiles ${tile} -w ${wait_minutes}
 fi
 export err=$?; err_chk
