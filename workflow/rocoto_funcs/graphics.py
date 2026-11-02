@@ -25,6 +25,8 @@ def graphics(xmlFile, expdir):
         'GRAPHICS_MODEL': os.getenv('GRAPHICS_MODEL', ''),
         'UPP_DOMAIN': os.getenv('UPP_DOMAIN', 'conus.'),
     }
+    if "global" in os.getenv("MESH_NAME"):
+        dcTaskEnv['GRAPHICS_IMAGE_LIST'] = 'global_mpas.yml'
     # dependencies
     timedep = ""
     realtime = os.getenv("REALTIME", "false")

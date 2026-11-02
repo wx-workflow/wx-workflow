@@ -65,3 +65,8 @@ export ARCHIVE_HPSSDIR="/5year/BMC/wrfruc/global10km"
 export ARCHIVE_COM1_SPEC='{"include":"ioda*, jedivar, nonvar*, fcst, upp, pyDAmonitor, graphics", "exclude":""}'  # use " inside and ' outside
 #export ARCHIVE_STMP=''  # eg. 'fcst,mpassit'  # archive files under the given task umbrella directories
 #export ARCHIVE_STMP_INTERVAL='1'  # ARCHIVE_STMP_INTERVAL must divide ARCHIVE_INTERVAL evenly
+
+export DO_GRAPHICS=true
+export GRAPHICS_TILES="full"  #NE NC NW SE SC SW EastCO"
+export GRAPHICS_MODEL="global_mpas"
+export NODES_GRAPHICS="<nodes>1:ppn=60</nodes>"
