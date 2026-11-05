@@ -57,6 +57,8 @@ def getkf(xmlFile, expdir, taskType):
     if taskType.upper() == "OBSERVER" or taskType.upper() == "OBSERVER_SOLVER":
         if os.getenv("DO_IODA", "FALSE").upper() == "TRUE":
             iodadep = '<taskdep task="ioda_bufr"/>'
+            if os.getenv("DO_MTGIRS", "FALSE").upper() == "TRUE":
+                iodadep += '\n    <taskdep task="ioda_mtgirs"/>'
             dcTaskEnv['IODA_BUFR_WGF'] = 'enkf'
         else:
             iodadep = f'<datadep age="00:01:00"><cyclestr>&COMROOT;/&NET;/&rrfs_ver;/&RUN;.@Y@m@d/@H/ioda_bufr/det/ioda_aircar.nc</cyclestr></datadep>'

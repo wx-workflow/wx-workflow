@@ -97,6 +97,15 @@ export NODES_IODA_AIRNOW=${NODES_IODA_AIRNOW:-"<nodes>1:ppn=1</nodes>"}
 # ioda_bufr
 export NODES_IODA_BUFR=${NODES_IODA_BUFR:-"<nodes>1:ppn=1</nodes>"}
 
+# ioda_mtgirs
+export DO_MTGIRS=${DO_MTGIRS:-false}
+export OBSPATH_MTGIRS=${OBSPATH_MTGIRS:-""}
+export NODES_IODA_MTGIRS=${NODES_IODA_MTGIRS:-"<nodes>1:ppn=384</nodes>"}
+export WALLTIME_IODA_MTGIRS=${WALLTIME_IODA_MTGIRS:-"00:15:00"}
+export MTG_IRS_QUADRANTS=${MTG_IRS_QUADRANTS:-"Q3 Q4"}
+export MTG_IRS_WINDOW=${MTG_IRS_WINDOW:-15}
+export MTG_IRS_RESOLUTION=${MTG_IRS_RESOLUTION:-16}
+
 # ioda_mrms_refl
 export NODES_IODA_MRMS_REFL=${NODES_IODA_MRMS_REFL:-"<nodes>1:ppn=40</nodes>"}
 

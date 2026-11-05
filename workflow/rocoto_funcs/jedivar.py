@@ -118,6 +118,8 @@ def jedivar(xmlFile, expdir, spinup_mode=0):
 
     if os.getenv("DO_IODA", "FALSE").upper() == "TRUE":
         iodadep = '<taskdep task="ioda_bufr"/>'
+        if os.getenv("DO_MTGIRS", "FALSE").upper() == "TRUE":
+            iodadep += '\n    <taskdep task="ioda_mtgirs"/>'
     else:
         iodadep = f'<datadep age="00:01:00"><cyclestr>&COMROOT;/&NET;/&rrfs_ver;/&RUN;.@Y@m@d/@H/ioda_bufr/det/ioda_aircar.nc</cyclestr></datadep>'
     #

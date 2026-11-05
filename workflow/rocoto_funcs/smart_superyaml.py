@@ -51,12 +51,12 @@ def smart_superyaml(HOMErrfs, ytype, mesh, getkf_onestep=False):
                                 f"{indent}  name: Halo",
                             ]
 
-    elif ytype == "jedivar" and mesh in {"conus12km", "na12km"}:  # temporary fix until GSIBEC is updated
+    elif ytype == "jedivar" and mesh in {"conus12km", "na12km", "eu12km"}:  # temporary fix until GSIBEC is updated
         hy.modify(data, 'regional nn fill distance in km', 'regional nn fill distance in km: 5000')
     #
     # insert correct domain-specific polygon configuration
-    if os.getenv("JEDI_POLYGON_FILTER", "TRUE") == "TRUE":
-        fpolygon = f'{HOMErrfs}/fix/{mesh}/{mesh}.polygon.yaml'
+    fpolygon = f'{HOMErrfs}/fix/{mesh}/{mesh}.polygon.yaml'
+    if os.getenv("JEDI_POLYGON_FILTER", "TRUE") == "TRUE" and os.path.isfile(fpolygon):
         polygon = hy.load(fpolygon)
         data[0:0] = polygon  # insert at the beginning
     else:

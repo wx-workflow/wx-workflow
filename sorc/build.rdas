@@ -71,4 +71,12 @@ cp "${EXEC4}" "${HOMErrfs}/exec/bufr2netcdf.x"
 
 echo "copy ${EXEC5} to ../exec/mpasjedi_hofx3d.x"
 cp "${EXEC5}" "${HOMErrfs}/exec/mpasjedi_hofx3d.x"
+
+if [[ -s "${HOMErrfs}/sorc/_workaround_/iodaconv/irs_2ioda.py" ]]; then
+  echo "copy workaround irs_2ioda.py to ../exec/irs_2ioda.py"
+  cp "${HOMErrfs}/sorc/_workaround_/iodaconv/irs_2ioda.py" "${HOMErrfs}/exec/irs_2ioda.py"
+elif [[ -s "${HOMErrfs}/sorc/RDASApp/build/bin/irs_2ioda.py" ]]; then
+  echo "copy upstream irs_2ioda.py to ../exec/irs_2ioda.py"
+  cp "${HOMErrfs}/sorc/RDASApp/build/bin/irs_2ioda.py" "${HOMErrfs}/exec/irs_2ioda.py"
+fi
 exit 0

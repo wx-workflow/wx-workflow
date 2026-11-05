@@ -166,6 +166,23 @@ elif [[ ${MESH_NAME} == "ar3p5km" ]]; then
   export GSIBEC_LAT_START=-21.760200
   export GSIBEC_LAT_END=21.760200
 
+elif [[ ${MESH_NAME} == "eu12km" ]]; then
+  export FCST_DT=60
+  export FCST_SUBSTEPS=2
+  export FCST_RADT=30
+  export FCST_CONVECTION_SCHEME=true
+  export UPP_DOMAIN="eu."
+  export MRMS_GRIDSPACINGDEG=0.10
+  export GRAPHICS_TILES="full"
+
+  # MPASSIT regridding projection for European domain
+  export MPASSIT_NX=900
+  export MPASSIT_NY=650
+  export MPASSIT_DX=12000.0
+  export MPASSIT_REF_LAT=50.0
+  export MPASSIT_REF_LON=15.0
+  export STATIC_BEC_MODEL="BUMPBEC"
+
 elif [[ ${MESH_NAME} == "ea5km" ]]; then
   export FCST_DT=25
   export FCST_SUBSTEPS=4

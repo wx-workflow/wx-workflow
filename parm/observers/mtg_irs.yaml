@@ -1,0 +1,27 @@
+obs space:
+  name: mtg_irs
+  obsdatain:
+    engine:
+      type: H5File
+      obsfile: data/obs/ioda_mtgirs.nc
+      missing file action: "warn"
+  obsdataout:
+    engine:
+      type: H5File
+      obsfile: data/output/hofx_mtg_irs.nc
+  simulated variables: [brightnessTemperature]
+  channels: 1-1960
+obs operator:
+  name: CRTM
+  Absorbers: [H2O, O3, CO2]
+  obs options:
+    Sensor_ID: mtg_irs
+    EndianType: little_endian
+    CoefficientPath: Data/crtm
+linear obs operator:
+  name: CRTM
+  Absorbers: [H2O, O3, CO2]
+  obs options:
+    Sensor_ID: mtg_irs
+    EndianType: little_endian
+    CoefficientPath: Data/crtm
